@@ -1,0 +1,40 @@
+REST API backend for Hitch Android and iOS applications. Created using Express.js 4 Mongoose.js.
+
+Models (API Support):
+- User (POST, GET)
+- Profile (POST, GET, PUT, GET:id, DELETE)
+- Thread (POST, GET, PUT, GET:id, DELETE)
+- Comment (POST, GET, PUT, GET:id, DELETE)
+- Image (POST, GET, PUT, GET:id, DELETE)
+
+File Upload:
+- Capable of file (image) uploads through multipart/form-data requests.
+
+Authentication:
+- User authentication for POST and DELETE using Passport.js
+- Client application authorization using oAuth2orize and Passport.js
+
+===============================================================================
+
+Setup:
+- clone repository
+- Install needed modules (if necessary):
+   - npm install mongoose --save
+   - npm install body-parser --save
+   - npm install bcrypt-nodejs --save
+   - npm install passport --save
+   - npm install passport-http --save
+   - npm install passport-http-bearer --save
+   - npm install ejs --save
+   - npm install express-session --save
+   - npm install oauth2orize --save
+- RUN: $ node server.js
+- use Chrome Postman to test API
+
+
+TODO:
+- Tweak API if necessary
+- Work on Android app
+- Work on iOS app
+- Deploy and tweak code specific to hosting service
+- Test
