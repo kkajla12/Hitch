@@ -28,21 +28,21 @@ exports.getThreads = function(req, res) {
 
 exports.getThread = function(req, res) {
    Thread.findById(req.params.thread_id, function(err, thread) {
-      
+
       var comments = Comment.find({ threadId: thread._id }, function(err, comments) {
 
-         var images = Image.find({ threadId: thread._id }, function(err, images) {
-	    if (err)
-	       res.send(err);   
+        var images = Image.find({ threadId: thread._id }, function(err, images) {
+  	       if (err)
+  	          res.send(err);
 
-	    res.json([{ thread: thread, comments: comments, images: images}]);
-	 });
+           res.json([{ thread: thread, comments: comments, images: images}]);
+  	    });
       });
-   });
+  });
 };
 
 exports.putThread = function(req, res) {
-   Thread.update({ userId: req.user._id, _id: req.params.thread_idi }, { category: req.body.category, images: req.body.images, comments: req.body.comments, description: req.body.description }, function(err, num, raw) {
+   Thread.update({ userId: req.user._id, _id: req.params.thread_id }, { category: req.body.category, images: req.body.images, comments: req.body.comments, description: req.body.description }, function(err, num, raw) {
       if (err)
          res.send(err);
 
@@ -57,4 +57,31 @@ exports.deleteThread = function(req, res) {
 
       res.json({ message: 'Thread removed!' });
    });
+};
+
+exports.getThread = function(req, res) {
+  Thread.find({ category: req.params.category }, function(err, threads) {
+    if (err)
+      res.send(err);
+
+    res.json({ threads: threads });
+  });
+};
+
+exports.getThread = function(req, res) {
+  Thread.find({ userId: req.params.user_id }, function(err, threads) {
+    if (err)
+      res.send(err);
+
+    res.json({ threads: threads });
+  });
+};
+
+exports.getThread = function(req, res) {
+  Thread.find({ created: req.params.date }, function(err, threads) {
+    if (err)
+      res.send(err);
+
+    res.json({ threads: threads });
+  });
 };

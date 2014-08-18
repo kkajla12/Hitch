@@ -51,3 +51,30 @@ exports.deleteImage = function(req, res) {
       res.json({ message: 'Image removed!' });
    });
 };
+
+exports.getImages = function(req, res) {
+   Image.find({ created: req.params.date }, function(err, images) {
+      if (err)
+         res.send(err);
+
+      res.json(images);
+   });
+};
+
+exports.getImages = function(req, res) {
+   Image.find({ threadId: req.params.thread_id }, function(err, images) {
+      if (err)
+         res.send(err);
+
+      res.json(images);
+   });
+};
+
+exports.getImages = function(req, res) {
+   Image.find({ userId: req.params.user_id }, function(err, images) {
+      if (err)
+         res.send(err);
+
+      res.json(images);
+   });
+};

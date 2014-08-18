@@ -58,10 +58,23 @@ router.route('/api/profiles/:profile_id')
    .put(authController.isAuthenticated, profileController.putProfile)
    .delete(authController.isAuthenticated, profileController.deleteProfile);
 
+router.route('/api/profiles/:user_id')
+   .get(profileController.getProfile)
+   .put(authController.isAuthenticated, profileController.putProfile)
+   .delete(authController.isAuthenticated, profileController.deleteProfile);
+
 // User Routes
 router.route('/api/users')
    .post(userController.postUsers)
    .get(authController.isAuthenticated, userController.getUsers);
+
+router.route('/api/users/:user_id')
+   .get(authController.isAuthenticated, userController.getUser)
+   .put(authController.isAuthenticated, userController.putUser);
+
+router.route('/api/users/:user_name')
+   .get(authController.isAuthenticated, userController.getUser)
+   .put(authController.isAuthenticated, userController.putUser);
 
 // Image Routes
 router.route('/api/images')
@@ -73,6 +86,15 @@ router.route('/api/images/:image_id')
    .put(authController.isAuthenticated, imageController.putImage)
    .delete(authController.isAuthenticated, imageController.deleteImage);
 
+router.route('/api/images/:date')
+   .get(imageController.getImage);
+
+router.route('/api/images/:thread_id')
+   .get(imageController.getImage);
+
+router.route('/api/images/:user_id')
+   .get(imageController.getImage);
+
 // Thread Routes
 router.route('/api/threads')
    .post(authController.isAuthenticated, threadController.postThreads)
@@ -83,6 +105,15 @@ router.route('/api/threads/:thread_id')
    .put(authController.isAuthenticated, threadController.putThread)
    .delete(authController.isAuthenticated, threadController.deleteThread);
 
+router.route('/api/threads/:category')
+   .get(threadController.getThread);
+
+router.route('/api/threads/:user_id')
+   .get(threadController.getThread);
+
+router.route('/api/threads/:date')
+   .get(threadController.getThread);
+
 // Comment Routes
 router.route('/api/comments')
    .post(authController.isAuthenticated, commentController.postComments)
@@ -92,6 +123,15 @@ router.route('/api/comments/:comment_id')
    .get(commentController.getComment)
    .put(authController.isAuthenticated, commentController.putComment)
    .delete(authController.isAuthenticated, commentController.deleteComment);
+
+router.route('/api/comments/:date')
+   .get(commentController.getComment);
+
+router.route('/api/comments/:thread_id')
+   .get(commentController.getComment);
+
+router.route('/api/comments/:user_id')
+   .get(commentController.getComment);
 
 app.use('/', router);
 //app.use('/api', router);

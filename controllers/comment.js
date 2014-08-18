@@ -51,3 +51,30 @@ exports.deleteComment = function(req, res) {
       res.json({ message: 'Comment removed!' });
    });
 };
+
+exports.getComments = function(req, res) {
+   Comment.find({ created: req.params.date }, function(err, comments) {
+      if (err)
+         res.send(err);
+
+      res.json(comments);
+   });
+};
+
+exports.getComments = function(req, res) {
+   Comment.find({ threadId: req.params.thread_id }, function(err, comments) {
+      if (err)
+         res.send(err);
+
+      res.json(comments);
+   });
+};
+
+exports.getComments = function(req, res) {
+   Comment.find({ userId: req.params.user_id }, function(err, comments) {
+      if (err)
+         res.send(err);
+
+      res.json(comments);
+   });
+};

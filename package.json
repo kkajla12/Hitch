@@ -9,6 +9,7 @@
     "express": "latest",
     "express-session": "^1.6.5",
     "mongoose": "^3.8.13",
+    "mongoose-unique-validator": "^0.3.0",
     "oauth2orize": "^1.0.1",
     "passport": "^0.2.0",
     "passport-http": "^0.2.2",

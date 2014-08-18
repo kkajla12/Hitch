@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
+var uniqueValidator = require('mongoose-unique-validator');
 
 var UserSchema = new mongoose.Schema({
    username: {
@@ -10,17 +11,14 @@ var UserSchema = new mongoose.Schema({
    password: {
       type: String,
       required: true
+   },
+   email: {
+     type: String,
+     unique: true,
+     required: true
    }
-   /*threads: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Thread' }],
-   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
-   num_comments: { type: Number, default: 0 },
-   likes: { type: Number, default: 0 },
-   relationship_rating: { type: Number, default: 0 },
-   hookup_rating: { type: Number, default: 0 },
-   firstdate_rating: { type: Number, default: 0 },
-   breakup_rating: { type: Number, default: 0 },
-   latenight_rating: { type: Number, default: 0 }*/
 });
+UserSchema.plugin(uniqueValidator);
 
 UserSchema.pre('save', function(callback) {
    var user = this;

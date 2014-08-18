@@ -4,7 +4,7 @@ var ImageSchema = new mongoose.Schema({
    filename: String,
    url: String,
    threadId: mongoose.Schema.ObjectId,
-   date: { type: Date, default: Date.now },
+   created: { type: Date, default: Date.now },
    userId: String
 });
 
