@@ -24,7 +24,7 @@ exports.getUsers = function(req, res) {
    });
 };
 
-exports.getUser = function(req, res) {
+exports.getUserById = function(req, res) {
   User.findById(req.params.user_id, function(err, user) {
     if (err)
       res.send(err);
@@ -38,7 +38,7 @@ exports.getUser = function(req, res) {
   });
 };
 
-exports.getUser = function(req, res) {
+exports.getUserByName = function(req, res) {
   User.find({ username: req.param.user_name }, function(err, user) {
     if (err)
       res.send(err);

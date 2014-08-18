@@ -69,12 +69,10 @@ router.route('/api/users')
    .get(authController.isAuthenticated, userController.getUsers);
 
 router.route('/api/users/:user_id')
-   .get(authController.isAuthenticated, userController.getUser)
-   .put(authController.isAuthenticated, userController.putUser);
+   .get(authController.isAuthenticated, userController.getUserById);
 
 router.route('/api/users/:user_name')
-   .get(authController.isAuthenticated, userController.getUser)
-   .put(authController.isAuthenticated, userController.putUser);
+   .get(authController.isAuthenticated, userController.getUserByName);
 
 // Image Routes
 router.route('/api/images')
