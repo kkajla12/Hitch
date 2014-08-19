@@ -3,6 +3,7 @@ var Profile = require('../models/profile');
 exports.postProfiles = function(req, res) {
    var profile = new Profile();
 
+   profile.username = req.body.username;
    profile.num_comments = req.body.num_comments;
    profile.likes = req.body.likes;
    profile.userId = req.user._id;
