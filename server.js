@@ -50,7 +50,6 @@ router.route('/api/clients')
 
 // Profile Routes
 router.route('/api/profiles')
-   .post(profileController.postProfiles)
    .get(profileController.getProfiles);
 
 router.route('/api/profiles/:profile_id')
@@ -60,6 +59,7 @@ router.route('/api/profiles/:profile_id')
 
 router.route('/api/profiles/:user_id')
    .get(profileController.getProfile)
+   .post(profileController.postProfiles)
    .put(authController.isAuthenticated, profileController.putProfile)
    .delete(authController.isAuthenticated, profileController.deleteProfile);
 
