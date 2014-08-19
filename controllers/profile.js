@@ -58,7 +58,7 @@ exports.deleteProfile = function(req, res) {
 };
 
 exports.getProfile = function(req, res) {
-  Profile.find({ userId: req.user._id }, function(err, profile) {
+  Profile.find({ userId: req.params.user_id }, function(err, profile) {
     if(err)
       res.send(err);
 
