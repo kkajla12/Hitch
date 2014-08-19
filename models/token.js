@@ -6,7 +6,7 @@ var TokenSchema = new mongoose.Schema({
    clientId: { type: String, required: true }
 });
 
-TokenSchema.pre('save', function(callback) {
+/*TokenSchema.pre('save', function(callback) {
    var token = this;
 
    if (!token.isModified('value')) return callback();
@@ -20,6 +20,6 @@ TokenSchema.pre('save', function(callback) {
    callback();
       });
    });
-});
+});*/
 
 module.exports = mongoose.model('Token', TokenSchema);
