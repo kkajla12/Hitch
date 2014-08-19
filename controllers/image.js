@@ -52,7 +52,7 @@ exports.deleteImage = function(req, res) {
    });
 };
 
-exports.getImages = function(req, res) {
+exports.getImageByDate = function(req, res) {
    Image.find({ created: req.params.date }, function(err, images) {
       if (err)
          res.send(err);
@@ -61,7 +61,7 @@ exports.getImages = function(req, res) {
    });
 };
 
-exports.getImages = function(req, res) {
+exports.getImageByThread = function(req, res) {
    Image.find({ threadId: req.params.thread_id }, function(err, images) {
       if (err)
          res.send(err);
@@ -70,7 +70,7 @@ exports.getImages = function(req, res) {
    });
 };
 
-exports.getImages = function(req, res) {
+exports.getImageByUser = function(req, res) {
    Image.find({ userId: req.params.user_id }, function(err, images) {
       if (err)
          res.send(err);

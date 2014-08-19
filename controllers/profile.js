@@ -57,7 +57,7 @@ exports.deleteProfile = function(req, res) {
    });
 };
 
-exports.getProfile = function(req, res) {
+exports.getProfileByUser = function(req, res) {
   Profile.find({ userId: req.params.user_id }, function(err, profile) {
     if(err)
       res.send(err);
@@ -66,8 +66,8 @@ exports.getProfile = function(req, res) {
   });
 };
 
-exports.putProfile = function(req, res) {
-   Profile.update({ userId: req.user._id }, { num_comments: req.body.num_comments, likes: req.body.likes, relationship_rating: req.body.relationship_rating, hookup_rating: req.body.hookup_rating, firstdate_rating: req.body.firstdate_rating, breakup_rating: req.body.breakup_rating, latenight_rating: req.body.latenight_rating }, function(err, num, raw) {
+exports.putProfileByUser = function(req, res) {
+   Profile.update({ userId: req.params.user_id }, { num_comments: req.body.num_comments, likes: req.body.likes, relationship_rating: req.body.relationship_rating, hookup_rating: req.body.hookup_rating, firstdate_rating: req.body.firstdate_rating, breakup_rating: req.body.breakup_rating, latenight_rating: req.body.latenight_rating }, function(err, num, raw) {
       if (err)
    res.send(err);
 
@@ -75,8 +75,8 @@ exports.putProfile = function(req, res) {
    });
 };
 
-exports.deleteProfile = function(req, res) {
-   Profile.remove({ userId: req.user._id }, function(err) {
+exports.deleteProfileByUser = function(req, res) {
+   Profile.remove({ userId: req.params.user_id }, function(err) {
       if (err)
    res.send(err);
 

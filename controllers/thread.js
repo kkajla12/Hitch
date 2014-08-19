@@ -59,7 +59,7 @@ exports.deleteThread = function(req, res) {
    });
 };
 
-exports.getThread = function(req, res) {
+exports.getThreadByCategory = function(req, res) {
   Thread.find({ category: req.params.category }, function(err, threads) {
     if (err)
       res.send(err);
@@ -68,7 +68,7 @@ exports.getThread = function(req, res) {
   });
 };
 
-exports.getThread = function(req, res) {
+exports.getThreadByUser = function(req, res) {
   Thread.find({ userId: req.params.user_id }, function(err, threads) {
     if (err)
       res.send(err);
@@ -77,7 +77,7 @@ exports.getThread = function(req, res) {
   });
 };
 
-exports.getThread = function(req, res) {
+exports.getThreadByDate = function(req, res) {
   Thread.find({ created: req.params.date }, function(err, threads) {
     if (err)
       res.send(err);

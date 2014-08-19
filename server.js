@@ -57,11 +57,11 @@ router.route('/api/profiles/:profile_id')
    .put(authController.isAuthenticated, profileController.putProfile)
    .delete(authController.isAuthenticated, profileController.deleteProfile);
 
-router.route('/api/profiles/:user_id')
-   .get(profileController.getProfile)
+router.route('/api/profiles/user/:user_id')
+   .get(profileController.getProfileByUser)
    .post(profileController.postProfiles)
-   .put(authController.isAuthenticated, profileController.putProfile)
-   .delete(authController.isAuthenticated, profileController.deleteProfile);
+   .put(authController.isAuthenticated, profileController.putProfileByUser)
+   .delete(authController.isAuthenticated, profileController.deleteProfileByUser);
 
 // User Routes
 router.route('/api/users')
@@ -71,7 +71,7 @@ router.route('/api/users')
 router.route('/api/users/:user_id')
    .get(authController.isAuthenticated, userController.getUserById);
 
-router.route('/api/users/:user_name')
+router.route('/api/users/username/:user_name')
    .get(authController.isAuthenticated, userController.getUserByName);
 
 // Image Routes
@@ -84,14 +84,14 @@ router.route('/api/images/:image_id')
    .put(authController.isAuthenticated, imageController.putImage)
    .delete(authController.isAuthenticated, imageController.deleteImage);
 
-router.route('/api/images/:date')
-   .get(imageController.getImage);
+router.route('/api/images/date/:date')
+   .get(imageController.getImageByDate);
 
-router.route('/api/images/:thread_id')
-   .get(imageController.getImage);
+router.route('/api/images/thread/:thread_id')
+   .get(imageController.getImageByThread);
 
-router.route('/api/images/:user_id')
-   .get(imageController.getImage);
+router.route('/api/images/user/:user_id')
+   .get(imageController.getImageByUser);
 
 // Thread Routes
 router.route('/api/threads')
@@ -103,14 +103,14 @@ router.route('/api/threads/:thread_id')
    .put(authController.isAuthenticated, threadController.putThread)
    .delete(authController.isAuthenticated, threadController.deleteThread);
 
-router.route('/api/threads/:category')
-   .get(threadController.getThread);
+router.route('/api/threads/category/:category')
+   .get(threadController.getThreadByCategory);
 
-router.route('/api/threads/:user_id')
-   .get(threadController.getThread);
+router.route('/api/threads/user/:user_id')
+   .get(threadController.getThreadByUser);
 
-router.route('/api/threads/:date')
-   .get(threadController.getThread);
+router.route('/api/threads/date/:date')
+   .get(threadController.getThreadByDate);
 
 // Comment Routes
 router.route('/api/comments')
@@ -122,14 +122,14 @@ router.route('/api/comments/:comment_id')
    .put(authController.isAuthenticated, commentController.putComment)
    .delete(authController.isAuthenticated, commentController.deleteComment);
 
-router.route('/api/comments/:date')
-   .get(commentController.getComment);
+router.route('/api/comments/date/:date')
+   .get(commentController.getCommentByDate);
 
-router.route('/api/comments/:thread_id')
-   .get(commentController.getComment);
+router.route('/api/comments/thread/:thread_id')
+   .get(commentController.getCommentByThread);
 
-router.route('/api/comments/:user_id')
-   .get(commentController.getComment);
+router.route('/api/comments/user/:user_id')
+   .get(commentController.getCommentByUser);
 
 app.use('/', router);
 //app.use('/api', router);

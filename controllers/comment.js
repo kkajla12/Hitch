@@ -52,7 +52,7 @@ exports.deleteComment = function(req, res) {
    });
 };
 
-exports.getComments = function(req, res) {
+exports.getCommentByDate = function(req, res) {
    Comment.find({ created: req.params.date }, function(err, comments) {
       if (err)
          res.send(err);
@@ -61,7 +61,7 @@ exports.getComments = function(req, res) {
    });
 };
 
-exports.getComments = function(req, res) {
+exports.getCommentByThread = function(req, res) {
    Comment.find({ threadId: req.params.thread_id }, function(err, comments) {
       if (err)
          res.send(err);
@@ -70,7 +70,7 @@ exports.getComments = function(req, res) {
    });
 };
 
-exports.getComments = function(req, res) {
+exports.getCommentByUser = function(req, res) {
    Comment.find({ userId: req.params.user_id }, function(err, comments) {
       if (err)
          res.send(err);
