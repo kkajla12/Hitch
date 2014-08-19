@@ -7,7 +7,7 @@ var CodeSchema = new mongoose.Schema({
    clientId: { type: String, required: true }
 });
 
-/*CodeSchema.pre('save', function(callback) {
+CodeSchema.pre('save', function(callback) {
    var code = this;
 
    if (!code.isModified('value')) return callback();
@@ -21,6 +21,6 @@ var CodeSchema = new mongoose.Schema({
    callback();
       });
    });
-});*/
+});
 
 module.exports = mongoose.model('Code', CodeSchema);
