@@ -12,7 +12,7 @@ exports.postUsers = function(req, res) {
       if (err)
 	       res.send(err);
 
-      res.json({ message: 'New user added!' });
+      res.json({ message: 'New user added!', userId: user._id });
    });
 };
 
@@ -40,7 +40,7 @@ exports.getUserById = function(req, res) {
 };
 
 exports.getUserByName = function(req, res) {
-  User.find({ username: req.param.user_name }, function(err, user) {
+  User.find({ username: req.params.user_name }, function(err, user) {
     if (err)
       res.send(err);
 
