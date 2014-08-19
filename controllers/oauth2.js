@@ -27,7 +27,7 @@ server.grant(oauth2orize.grant.code(function(client, redirectUri, user, ares, ca
 
    code.save(function(err) {
       if (err) { return callback(err); }
-      
+
       callback(null, code.value);
    });
 }));
@@ -37,7 +37,7 @@ server.exchange(oauth2orize.exchange.code(function(client, code, redirectUri, ca
       if (err) { return callback(err); }
       if (authCode === undefined) { return callback(null, false); }
       if (client._id.trString() !== authCode.clientId) { return callback(null, false); }
-      if(redirectUri !== authCode.redirectUri) { return callback(null, false); }
+      if (redirectUri !== authCode.redirectUri) { return callback(null, false); }
 
       authCode.remove(function (err) {
 	 if (err) { return callback(err); }
@@ -50,7 +50,7 @@ server.exchange(oauth2orize.exchange.code(function(client, code, redirectUri, ca
 
 	 token.save(function (err) {
 	    if (err) { return callback(err); }
-	    
+
 	    callback(null, token);
 	 });
       });
@@ -59,10 +59,10 @@ server.exchange(oauth2orize.exchange.code(function(client, code, redirectUri, ca
 
 exports.authorization = [
    server.authorization(function(clientId, redirectUri, callback) {
-      
+
       Client.findOne({ id: clientId }, function (err, client) {
 	 if (err) { return callback(err); }
-	 
+
 	 return callback(null, client, redirectUri);
       });
    }),

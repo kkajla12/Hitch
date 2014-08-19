@@ -18,7 +18,9 @@ mongoose.connect('mongodb://localhost:27017/hitchdatabase');
 
 var app = express();
 app.set('view engine', 'ejs');
-app.use(bodyParser());
+app.use(bodyParser().urlendcoded({
+  extended: true
+}));
 app.use(passport.initialize());
 
 app.use(session({
