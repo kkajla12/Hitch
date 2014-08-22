@@ -5,6 +5,7 @@ var Comment = require('../models/comment');
 exports.postThreads = function(req, res) {
    var thread = new Thread();
 
+   thread.title = req.body.title;
    thread.category = req.body.category;
    thread.description = req.body.description;
    thread.userId = req.params.user_id;
