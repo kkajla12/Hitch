@@ -6,7 +6,7 @@ exports.postComments = function(req, res) {
    comment.content = req.body.content;
    comment.likes = req.body.likes;
    comment.threadId = req.body.threadId;
-   comment.userId = req.user._id;
+   comment.userId = req.params.user_id;
 
    comment.save(function(err) {
       if (err)

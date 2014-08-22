@@ -6,7 +6,7 @@ exports.postImages = function(req, res) {
    image.filename = req.body.filename;
    image.url = req.body.url;
    image.threadId = req.body.threadId;
-   image.userId = req.user._id;
+   image.userId = req.params.user_id;
 
    image.save(function(err) {
       if (err)

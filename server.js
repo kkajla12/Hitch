@@ -78,7 +78,6 @@ router.route('/api/users/username/:user_name')
 
 // Image Routes
 router.route('/api/images')
-   .post(authController.isAuthenticated, imageController.postImages)
    .get(imageController.getImages);
 
 router.route('/api/images/:image_id')
@@ -93,11 +92,11 @@ router.route('/api/images/thread/:thread_id')
    .get(imageController.getImageByThread);
 
 router.route('/api/images/user/:user_id')
-   .get(imageController.getImageByUser);
+   .get(imageController.getImageByUser)
+   .post(authController.isAuthenticated, imageController.postImages);
 
 // Thread Routes
 router.route('/api/threads')
-   .post(authController.isAuthenticated, threadController.postThreads)
    .get(threadController.getThreads);
 
 router.route('/api/threads/:thread_id')
@@ -109,14 +108,14 @@ router.route('/api/threads/category/:category')
    .get(threadController.getThreadByCategory);
 
 router.route('/api/threads/user/:user_id')
-   .get(threadController.getThreadByUser);
+   .get(threadController.getThreadByUser)
+   .post(authController.isAuthenticated, threadController.postThreads);
 
 router.route('/api/threads/date/:date')
    .get(threadController.getThreadByDate);
 
 // Comment Routes
 router.route('/api/comments')
-   .post(authController.isAuthenticated, commentController.postComments)
    .get(commentController.getComments);
 
 router.route('/api/comments/:comment_id')
@@ -131,7 +130,8 @@ router.route('/api/comments/thread/:thread_id')
    .get(commentController.getCommentByThread);
 
 router.route('/api/comments/user/:user_id')
-   .get(commentController.getCommentByUser);
+   .get(commentController.getCommentByUser)
+   .post(authController.isAuthenticated, commentController.postComments);
 
 app.use('/', router);
 //app.use('/api', router);

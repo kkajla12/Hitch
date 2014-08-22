@@ -7,7 +7,7 @@ exports.postThreads = function(req, res) {
 
    thread.category = req.body.category;
    thread.description = req.body.description;
-   thread.userId = req.user._id;
+   thread.userId = req.params.user_id;
 
    thread.save(function(err) {
       if (err)
