@@ -95,6 +95,9 @@ router.route('/api/images/user/:user_id')
    .get(imageController.getImageByUser)
    .post(authController.isAuthenticated, imageController.postImages);
 
+router.route('/download/:image_id')
+   .get(imageController.downloadImage);
+
 // Thread Routes
 router.route('/api/threads')
    .get(threadController.getThreads);

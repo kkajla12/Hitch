@@ -78,3 +78,13 @@ exports.getImageByUser = function(req, res) {
       res.json(images);
    });
 };
+
+exports.downloadImage = function(req, res) {
+   Image.findById(req.params.image_id, 'filename', function (err, image) {
+      if(err)
+         res.send(err);
+
+      res.sendfile('/uploaded/files/' + image.filename, { 'root': '/Users/Karan/Documents/Projects/hitch/public' });
+      //res.send(image.filename);
+   });
+};
