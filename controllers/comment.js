@@ -1,4 +1,5 @@
 var Comment = require('../models/comment');
+var Thread = require('../models/thread');
 
 exports.postComments = function(req, res) {
    var comment = new Comment();
@@ -12,7 +13,19 @@ exports.postComments = function(req, res) {
       if (err)
          res.send(err);
 
-      res.json({ message: 'Comment added!', data: comment });
+      Thread.findById(req.body.threadId, function(err, thread) {
+         if (err)
+            res.send(err);
+
+         thread.num_comments += 1;
+
+         thread.save(function(err) {
+            if (err)
+               res.send(err);
+
+            res.json({ message: 'Comment added!', data: comment });
+         });
+      });
    });
 };
 
@@ -34,12 +47,35 @@ exports.getComment = function(req, res) {
    });
 };
 
-exports.putComment = function(req, res) {
-   Comment.update({ userId: req.user._id, _id: req.params.comment_id }, { content: req.body.content, likes: req.body.likes }, function(err, num, raw) {
+exports.likeComment = function(req, res) {
+   Comment.findById(req.params.comment_id, function(err, comment) {
       if (err)
          res.send(err);
 
-      res.json({ message: num + 'updated' });
+      comment.likes += 1;
+
+      comment.save(function(err){
+         if (err)
+            res.send(err);
+
+         res.json(comment);
+      });
+   });
+};
+
+exports.putComment = function(req, res) {
+   Comment.findById(req.params.comment_id, function(err, comment) {
+      if (err)
+         res.send(err);
+
+      comment.content = req.body.content;
+
+      comment.save(function(err){
+         if (err)
+            res.send(err);
+
+         res.json(comment);
+      });
    });
 };
 

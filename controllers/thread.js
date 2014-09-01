@@ -30,9 +30,9 @@ exports.getThreads = function(req, res) {
 exports.getThread = function(req, res) {
    Thread.findById(req.params.thread_id, function(err, thread) {
 
-      var comments = Comment.find({ threadId: thread._id }, function(err, comments) {
+      var comments = Comment.find({ threadId: req.params.thread_id }, function(err, comments) {
 
-        var images = Image.find({ threadId: thread._id }, function(err, images) {
+        var images = Image.find({ threadId: req.params.thread_id }, function(err, images) {
   	       if (err)
   	          res.send(err);
 
@@ -84,5 +84,14 @@ exports.getThreadByDate = function(req, res) {
       res.send(err);
 
     res.json({ threads: threads });
+  });
+};
+
+exports.getTopThreads = function(req, res) {
+  Thread.find().limit(20).sort('-num_comments').exec(function(err, threads) {
+     if (err)
+        res.send(err);
+
+     res.json({ threads: threads });
   });
 };

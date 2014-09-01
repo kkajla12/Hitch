@@ -117,6 +117,9 @@ router.route('/api/threads/user/:user_id')
 router.route('/api/threads/date/:date')
    .get(threadController.getThreadByDate);
 
+router.route('/api/threads/sort/top')
+   .get(threadController.getTopThreads);
+
 // Comment Routes
 router.route('/api/comments')
    .get(commentController.getComments);
@@ -125,6 +128,9 @@ router.route('/api/comments/:comment_id')
    .get(commentController.getComment)
    .put(authController.isAuthenticated, commentController.putComment)
    .delete(authController.isAuthenticated, commentController.deleteComment);
+
+router.route('/api/comments/like/:comment_id')
+   .put(authController.isAuthenticated, commentController.likeComment);
 
 router.route('/api/comments/date/:date')
    .get(commentController.getCommentByDate);
