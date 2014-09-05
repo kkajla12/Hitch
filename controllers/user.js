@@ -5,14 +5,24 @@ exports.postUsers = function(req, res) {
    var user = new User({
       username: req.body.username,
       password: req.body.password,
-	  email: req.body.email
+	    email: req.body.email
    });
 
    user.save(function(err) {
       if (err)
 	       res.send(err);
+         
+      var profile = new Profile({
+        username: req.body.username,
+        userId: user._id
+      });
 
-      res.json({ message: 'New user added!', userId: user._id });
+      profile.save(function(err) {
+         if (err)
+            res.send(err);
+
+         res.json({ message: 'New user added!', userId: user._id });
+      });
    });
 };
 

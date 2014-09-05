@@ -1,6 +1,7 @@
 var Thread = require('../models/thread');
 var Image = require('../models/image');
 var Comment = require('../models/comment');
+var Profile = require('../models/profile');
 
 exports.postThreads = function(req, res) {
    var thread = new Thread();
@@ -14,7 +15,19 @@ exports.postThreads = function(req, res) {
       if (err)
          res.send(err);
 
-      res.json({ message: 'Thread created!', data: thread });
+      Profile.findOne({ userId: req.params.user_id }, function(err, profile) {
+         if (err)
+            res.send(err);
+
+         profile.num_threads += 1;
+
+         profile.save(function(err) {
+            if (err)
+               res.send(err);
+               
+            res.json({ message: 'Thread created!', data: thread });
+         });
+      });
    });
 };
 

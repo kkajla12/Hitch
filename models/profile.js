@@ -4,7 +4,7 @@ var uniqueValidator = require('mongoose-unique-validator');
 var ProfileSchema = new mongoose.Schema({
    username: { type: String, unique: true, required: true },
    num_comments: { type: Number, default: 0 },
-   likes: { type: Number, default: 0 },
+   num_threads: { type: Number, default: 0 },
    userId: String,
    relationship_rating: { type: Number, default: 0 },
    hookup_rating: { type: Number, default: 0 },

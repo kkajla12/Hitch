@@ -1,5 +1,6 @@
 var Comment = require('../models/comment');
 var Thread = require('../models/thread');
+var Profile = require('../models/profile');
 
 exports.postComments = function(req, res) {
    var comment = new Comment();
@@ -23,7 +24,19 @@ exports.postComments = function(req, res) {
             if (err)
                res.send(err);
 
-            res.json({ message: 'Comment added!', data: comment });
+            Profile.findOne({ userId: req.params.user_id }, function(err, profile) {
+               if (err)
+                  res.send(err);
+
+               profile.num_comments += 1;
+
+               profile.save(function(err) {
+                  if (err)
+                     res.send(err);
+
+                  res.json({ message: 'Comment added!', data: comment });
+               });
+            });
          });
       });
    });
