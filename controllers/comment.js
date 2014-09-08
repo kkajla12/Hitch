@@ -10,10 +10,6 @@ exports.postComments = function(req, res) {
    comment.threadId = req.body.threadId;
    comment.userId = req.params.user_id;
 
-   comment.save(function(err) {
-      if (err)
-         res.send(err);
-
       Thread.findById(req.body.threadId, function(err, thread) {
          if (err)
             res.send(err);
@@ -28,18 +24,20 @@ exports.postComments = function(req, res) {
                if (err)
                   res.send(err);
 
+               comment.username = profile.username;
                profile.num_comments += 1;
 
                profile.save(function(err) {
-                  if (err)
-                     res.send(err);
+                  comment.save(function(err) {
+                     if (err)
+                        res.send(err);
 
-                  res.json({ message: 'Comment added!', data: comment });
+                     res.json({ message: 'Comment added!', data: comment });
+                  });
                });
             });
          });
       });
-   });
 };
 
 exports.getComments = function(req, res) {

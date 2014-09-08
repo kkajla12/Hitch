@@ -4,6 +4,7 @@ exports.postProfiles = function(req, res) {
    var profile = new Profile();
 
    profile.username = req.body.username;
+   profile.bio = req.body.bio;
    profile.num_comments = req.body.num_comments;
    profile.likes = req.body.likes;
    profile.userId = req.params.user_id;

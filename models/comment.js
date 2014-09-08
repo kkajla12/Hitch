@@ -5,6 +5,7 @@ var CommentSchema = new mongoose.Schema({
    likes: { type: Number, default: 0 },
    created: { type: Date, default: Date.now },
    threadId: mongoose.Schema.ObjectId,
+   username: String,
    userId: String
 });
 

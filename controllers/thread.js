@@ -11,24 +11,22 @@ exports.postThreads = function(req, res) {
    thread.description = req.body.description;
    thread.userId = req.params.user_id;
 
-   thread.save(function(err) {
-      if (err)
-         res.send(err);
-
       Profile.findOne({ userId: req.params.user_id }, function(err, profile) {
          if (err)
             res.send(err);
 
+         thread.username = profile.username;
          profile.num_threads += 1;
 
          profile.save(function(err) {
-            if (err)
-               res.send(err);
-               
-            res.json({ message: 'Thread created!', data: thread });
+            thread.save(function(err) {
+               if (err)
+                  res.send(err);
+
+               res.json({ message: 'Thread created!', data: thread });
+            });
          });
       });
-   });
 };
 
 exports.getThreads = function(req, res) {

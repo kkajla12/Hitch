@@ -11,10 +11,11 @@ exports.postUsers = function(req, res) {
    user.save(function(err) {
       if (err)
 	       res.send(err);
-         
+
       var profile = new Profile({
         username: req.body.username,
-        userId: user._id
+        userId: user._id,
+        bio: req.body.bio
       });
 
       profile.save(function(err) {

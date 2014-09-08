@@ -6,6 +6,7 @@ var ThreadSchema = new mongoose.Schema({
    description: { type: String, required: false },
    created: { type: Date, default: Date.now },
    userId: String,
+   username: String,
    num_comments: { type: Number, default: 0 }
 });
 
