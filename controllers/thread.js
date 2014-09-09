@@ -54,7 +54,7 @@ exports.getThread = function(req, res) {
 };
 
 exports.putThread = function(req, res) {
-   Thread.update({ userId: req.user._id, _id: req.params.thread_id }, { category: req.body.category, images: req.body.images, comments: req.body.comments, description: req.body.description }, function(err, num, raw) {
+   Thread.update({ userId: req.user._id, _id: req.params.thread_id }, { title: req.body.title, category: req.body.category, images: req.body.images, comments: req.body.comments, description: req.body.description }, function(err, num, raw) {
       if (err)
          res.send(err);
 
