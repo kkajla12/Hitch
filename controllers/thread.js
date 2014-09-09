@@ -54,11 +54,19 @@ exports.getThread = function(req, res) {
 };
 
 exports.putThread = function(req, res) {
-   Thread.update({ userId: req.user._id, _id: req.params.thread_id }, { title: req.body.title, category: req.body.category, images: req.body.images, comments: req.body.comments, description: req.body.description }, function(err, num, raw) {
+   Thread.findById(req.params.thread_id, function(err, thread) {
       if (err)
          res.send(err);
 
-      res.json({ message: num + 'updated' });
+      thread.title = req.body.title;
+      thread.category = req.body.category;
+      thread.description = req.body.description;
+
+      thread.save(function(err){
+         if(err)
+            res.send(err);
+         res.json(thread);
+      });
    });
 };
 
