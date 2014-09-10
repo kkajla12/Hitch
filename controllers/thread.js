@@ -2,6 +2,7 @@ var Thread = require('../models/thread');
 var Image = require('../models/image');
 var Comment = require('../models/comment');
 var Profile = require('../models/profile');
+var fs = require('fs');
 
 exports.postThreads = function(req, res) {
    var thread = new Thread();
@@ -71,7 +72,28 @@ exports.putThread = function(req, res) {
 };
 
 exports.deleteThread = function(req, res) {
-   Thread.remove({ userId: req.user._id, _id: req.params.thread_id }, function(err) {
+   Thread.findById(req.params.thread_id, function(err, thread) {
+      if(err)
+         res.send(err)
+
+      for(var comment in thread.comments) {
+         Comment.remove({ _id: comment._id }, function(err) {
+            if(err)
+               res.send(err);
+         });
+      }
+      for(var image in thread.images) {
+         fs.unlinkSync('/uploaded/files/' + image.filename);
+         console.log('successfully deleted' + image.filename);
+         Image.remove({ _id: image._id }, function(err) {
+            if(err)
+               res.send(err);
+         });
+      }
+   });
+
+
+   Thread.remove({ _id: req.params.thread_id }, function(err) {
       if (err)
          res.send(err);
 
