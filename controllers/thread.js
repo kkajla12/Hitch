@@ -72,33 +72,30 @@ exports.putThread = function(req, res) {
 };
 
 exports.deleteThread = function(req, res) {
-   Thread.findById(req.params.thread_id, function(err, thread) {
-      if(err)
-         res.send(err)
+      Comment.find({ threadId: req.params.thread_id }, function(err, comments) {
+        for(var comment in thread.comments) {
+           Comment.remove({ _id: comment._id }, function(err) {
+              if(err)
+                 res.send(err);
+           });
+        }
+      });
+      Image.find({ threadId: req.params.thread_id }, function(err, images) {
+        for(var image in thread.images) {
+           fs.unlinkSync('/uploaded/files/' + image.filename);
+           console.log('successfully deleted' + image.filename);
+           Image.remove({ _id: image._id }, function(err) {
+              if(err)
+                 res.send(err);
+           });
+        }
+      });
+      Thread.remove({ _id: req.params.thread_id }, function(err) {
+        if (err)
+          res.send(err);
 
-      for(var comment in thread.comments) {
-         Comment.remove({ _id: comment._id }, function(err) {
-            if(err)
-               res.send(err);
-         });
-      }
-      for(var image in thread.images) {
-         fs.unlinkSync('/uploaded/files/' + image.filename);
-         console.log('successfully deleted' + image.filename);
-         Image.remove({ _id: image._id }, function(err) {
-            if(err)
-               res.send(err);
-         });
-      }
-   });
-
-
-   Thread.remove({ _id: req.params.thread_id }, function(err) {
-      if (err)
-         res.send(err);
-
-      res.json({ message: 'Thread removed!' });
-   });
+        res.json({ message: 'Thread removed!' });
+      });
 };
 
 exports.getThreadByCategory = function(req, res) {
