@@ -114,3 +114,11 @@ exports.getTopThreads = function(req, res) {
      res.json({ threads: threads });
   });
 };
+
+exports.searchThreads = function(req, res) {
+  Thread.find({ title: new RegExp(req.params.search_string, "i") }, function(err, threads) {
+     if(err)
+        res.send(err)
+     res.json({ threads: threads });
+  });
+};

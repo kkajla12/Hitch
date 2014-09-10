@@ -120,6 +120,9 @@ router.route('/api/threads/date/:date')
 router.route('/api/threads/sort/top')
    .get(threadController.getTopThreads);
 
+router.route('/api/threads/search/:search_string')
+   .get(threadController.searchThreads);
+
 // Comment Routes
 router.route('/api/comments')
    .get(commentController.getComments);
