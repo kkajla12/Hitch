@@ -82,7 +82,7 @@ exports.deleteThread = function(req, res) {
       });
       Image.find({ threadId: req.params.thread_id }, function(err, images) {
         for(var image in images) {
-           fs.unlinkSync('/uploaded/files/' + image.filename);
+           fs.unlinkSync(__dirname + '../public/uploaded/files/' + image.filename);
            console.log('successfully deleted' + image.filename);
            Image.remove({ _id: image._id }, function(err) {
               if(err)
