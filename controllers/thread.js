@@ -90,6 +90,22 @@ exports.deleteThread = function(req, res) {
            });
         }
       });
+      Thread.findById(req.params.thread_id, function(err, thread) {
+        if (err)
+          res.send(err);
+
+        Profile.findById(thread.userId, function(err, profile) {
+          if (err)
+            res.send(err);
+
+          profile.num_threads -= 1;
+
+          profile.save(function(err) {
+            if (err)
+              res.send(err);
+          });
+        });
+      });
       Thread.remove({ _id: req.params.thread_id }, function(err) {
         if (err)
           res.send(err);
