@@ -74,7 +74,7 @@ exports.putThread = function(req, res) {
 exports.deleteThread = function(req, res) {
       Comment.find({ threadId: req.params.thread_id }, function(err, comments) {
         for(var comment in comments) {
-           Comment.remove({ _id: comment._id }, function(err) {
+           Comment.remove({ _id: comments[comment]._id }, function(err) {
               if(err)
                  res.send(err);
            });
@@ -82,9 +82,9 @@ exports.deleteThread = function(req, res) {
       });
       Image.find({ threadId: req.params.thread_id }, function(err, images) {
         for(var image in images) {
-           fs.unlinkSync(__dirname + '../public/uploaded/files/' + image.filename);
-           console.log('successfully deleted' + image.filename);
-           Image.remove({ _id: image._id }, function(err) {
+           fs.unlinkSync(__dirname + '/../public/uploaded/files/' + images[image].filename);
+           console.log('successfully deleted' + images[image].filename);
+           Image.remove({ _id: images[image]._id }, function(err) {
               if(err)
                  res.send(err);
            });
