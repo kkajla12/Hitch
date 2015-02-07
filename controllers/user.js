@@ -11,19 +11,21 @@ exports.postUsers = function(req, res) {
    user.save(function(err) {
       if (err)
 	       res.send(err);
+      else{
+        var profile = new Profile({
+          username: req.body.username,
+          userId: user._id,
+          bio: req.body.bio
+        });
 
-      var profile = new Profile({
-        username: req.body.username,
-        userId: user._id,
-        bio: req.body.bio
-      });
-
-      profile.save(function(err) {
-         if (err)
+        profile.save(function(err) {
+          if (err)
             res.send(err);
-
-         res.json({ message: 'New user added!', userId: user._id });
-      });
+          else{
+            res.json({ message: 'New user added!', userId: user._id });
+          }
+        });
+      }
    });
 };
 

@@ -94,7 +94,7 @@ exports.deleteThread = function(req, res) {
         if (err)
           res.send(err);
 
-        Profile.findById(thread.userId, function(err, profile) {
+        Profile.findOne({ userId: thread.userId}, function(err, profile) {
           if (err)
             res.send(err);
 
